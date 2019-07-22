@@ -3,7 +3,7 @@
 #include <string.h>
 #include "projectHeader.h"
 
-void heapify_str(char list[][MAX_LEN], int n, int i) 
+void heapify_str(char *list[], int n, int i) 
 { 
     
     int largest = i; // Initialize largest as root 
@@ -30,7 +30,7 @@ void heapify_str(char list[][MAX_LEN], int n, int i)
     }
 } 
 
-void heapSort_str(char list[][MAX_LEN], int n) 
+void heapSort_str(char *list[], int n) 
 { 
     int i;
     char temp[MAX_LEN];

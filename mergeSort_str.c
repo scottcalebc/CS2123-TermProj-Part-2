@@ -4,7 +4,17 @@
 #include "projectHeader.h"
 #define MAX 10  // This is the default size of every string 
 
-void merge_str(char arr[][MAX_LEN],int low,int mid,int high) //Merging the Array Function
+
+void freeArr(char *arr[], int dataSize)
+{
+    int i;
+    for (i = 0; i < dataSize; i++)
+        free(arr[i]);
+    free(arr);
+}
+
+
+void merge_str(char *arr[],int low,int mid,int high) //Merging the Array Function
 {
     int nL= mid-low+1;
     int nR= high-mid;
@@ -33,10 +43,13 @@ void merge_str(char arr[][MAX_LEN],int low,int mid,int high) //Merging the Array
     while(i<nL)strcpy(arr[k++],L[i++]);
     while(j<nR)strcpy(arr[k++],R[j++]);
 
+    freeArr(L, nL);
+    freeArr(R, nR);
+
 }
 
 
-void mergeSort_str(char arr[][MAX_LEN],int low,int high) //Main MergeSort function
+void mergeSort_str(char *arr[],int low,int high) //Main MergeSort function
 {
     if(low<high)
     {

@@ -2,7 +2,7 @@
 #include<string.h>
 #include "projectHeader.h"
 
-void countSort_str(char a[][MAX_LEN], int n, int exp) 
+void countSort_str(char *a[], int n, int exp) 
 { 
     //int output[n]; // output array 
     int i, count[256] = {0}; 
@@ -42,7 +42,7 @@ void countSort_str(char a[][MAX_LEN], int n, int exp)
 } 
   
 
-int getMax_str(char a[][MAX_LEN], int n) 
+int getMax_str(char *a[], int n) 
 { 
     int mx = 0;
     int i;
@@ -62,9 +62,9 @@ int getMax_str(char a[][MAX_LEN], int n)
      */ 
 } 
 
-void radixSort_str(char a[][MAX_LEN], int n) 
+void radixSort_str(char *a[], int n) 
 { 
-    printf("Starting");
+    //printf("Starting");
     // Find the maximum number to know number of digits 
     int m = getMax_str(a, n); 
     int exp;

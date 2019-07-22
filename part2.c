@@ -21,7 +21,7 @@ char ** createStringArr(int dataSize)
     
 }
 
-void destroyStringAr(char **arr, int dataSize)
+void releaseArr(char **arr, int dataSize)
 {
     int i;
     for(i = 0; i < dataSize; i++)
@@ -43,23 +43,6 @@ void fillArray_int(int arr[], int dataSize)
     }
 }
 
-void fillArray_str(char **arr, int dataSize)
-{
-    int i = 0;
-    FILE *names = fopen("new_name.txt", "r");
-    rewind(names);
-    while(i < dataSize && !feof(names))
-    {
-        fscanf(names, "%s", arr[i]);
-        i++;
-
-        if(feof(names))
-            rewind(names);
-    }
-
-    fclose(names);
-}
-
 double runSort_int(int dataSize, void (*sort1)(int[], int, int), void (*sort2)(int[],int))
 {
     int arr[dataSize];
@@ -69,7 +52,7 @@ double runSort_int(int dataSize, void (*sort1)(int[], int, int), void (*sort2)(i
     clock_t t;
     t = clock();
     if (sort1 != NULL)
-        sort1(arr, 0, dataSize -1);
+        sort1(arr, 0, dataSize - 1);
     else if (sort2 != NULL)
         sort2(arr, dataSize);
     t = clock() - t;
@@ -132,30 +115,25 @@ char ** fill(int dataSize)
         printf("Array not Allocated\n");
     }
 
-    long int i = 0;
-    char name[MAX_LEN];
+    int i = 0;
+    char name[MAX_LEN + 1];
 
 
     while(i < dataSize && fgets(name, MAX_LEN, fp) != NULL)
     {
-        names[i] = malloc(strlen(name) + 1);
+        names[i] = malloc(MAX_LEN * sizeof(char));
         strcpy(names[i], name);
         int j = strcspn(names[i], "\n\r");
         names[i][j] = '\0';
-        //printf("line %d: %s\t%s\n", i, name, names[i]);
         i++;
-
-        if (i%156352 == 0)
-        {
-            rewind(fp);
-        }
+        
     }
 
     fclose(fp);
     return names;
 }
 
-double runSort_str(char **names, int dataSize, void (*sort1)(char [][MAX_LEN], int, int), void (*sort2)(char[][MAX_LEN],int))
+double runSort_str(char **names, int dataSize, void (*sort1)(char *[], int, int), void (*sort2)(char*[],int))
 {
     
     clock_t t;
@@ -170,9 +148,9 @@ double runSort_str(char **names, int dataSize, void (*sort1)(char [][MAX_LEN], i
 
 }
 
-void Run_str(char *algo, void (*sort1)(char [][MAX_LEN],int,int), void(*sort2)(char [][MAX_LEN],int))
+void Run_str(char *algo, void (*sort1)(char *[],int,int), void(*sort2)(char *[],int))
 {
-    int dataSize[] = {100000,250000,500000};
+    int dataSize[] = {10000,78000,156353};
     int i,j;
     char **names;
 
@@ -189,7 +167,7 @@ void Run_str(char *algo, void (*sort1)(char [][MAX_LEN],int,int), void(*sort2)(c
             else if (sort2 != NULL)
                 avgTime += runSort_str(names,dataSize[i], sort1, NULL);
 
-            destroyStringAr(names, dataSize[i]);
+            releaseArr(names, dataSize[i]);
         }  
         writeData(algo, dataSize[i], avgTime/5); 
     }
@@ -197,7 +175,7 @@ void Run_str(char *algo, void (*sort1)(char [][MAX_LEN],int,int), void(*sort2)(c
 
 int main(){
 
-
+    
     Run_int("Quick", quickSort_int, NULL);
     Run_int("Merge", mergeSort_int, NULL);
     Run_int("Radix", NULL,radixSort_int);
@@ -207,17 +185,18 @@ int main(){
     
 
     //sorting algorithms on string smash stack
-    /*
-    Run_str("Merge", mergeSort_int, NULL);
-    Run_str("Radix", NULL,radixSort_int);
-    Run_str("Heap", NULL, heapSort_int);
-    Run_str("Quick", quickSort_int, NULL);
-    Run_str("Insertion", NULL, insertionSort_int);
-    Run_str("Selection", NULL, selectionSort_int);
-     */
-
-
+   /* 
+    Run_str("Merge", mergeSort_str, NULL);
+    */ 
+    Run_str("Radix", NULL,radixSort_str);
+   
+    Run_str("Heap", NULL, heapSort_str);
+    Run_str("Quick", quickSort_str, NULL);
+    Run_str("Insertion", NULL, insertionSort_str);
+    Run_str("Selection", NULL, selectionSort_str);
+    
     return 0;
+
 }
 
 

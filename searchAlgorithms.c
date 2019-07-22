@@ -26,7 +26,7 @@ return -1;
 }
 
 //linear str
-int linearSearchIterative_str(char data[][MAX_LEN], int n, char target[][MAX_LEN])
+int linearSearchIterative_str(char *data[], int n, char target[][MAX_LEN])
 {
 int i; 
 for (i = 0; i < n; i++)
@@ -53,7 +53,7 @@ return -1;
 }
 
 //binary str
-int BinarySearchIterative_str(char data[][MAX_LEN], int n, char target[][MAX_LEN])// BSI
+int BinarySearchIterative_str(char *data[], int n, char target[][MAX_LEN])// BSI
 { // data is sorted
 int low = 0, high = n - 1;
 while (low <= high) {

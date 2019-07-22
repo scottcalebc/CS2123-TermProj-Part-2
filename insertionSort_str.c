@@ -2,7 +2,7 @@
 #include <string.h> 
 #include "projectHeader.h"
 //insertion sort
-void InsertionSort_str(char list[][MAX_LEN], int n)
+void insertionSort_str(char *list[], int n)
 {
     int i, j;
     for (i = 1; i < n; i++)

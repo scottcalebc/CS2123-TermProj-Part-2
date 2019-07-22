@@ -3,7 +3,7 @@
 #define MAX_LEN 100  
 // Sorts an array of strings where length of every 
 // string should be smaller than MAX_LEN 
-void selectionSort_str(char arr[][MAX_LEN], int n) 
+void selectionSort_str(char *arr[], int n) 
 { 
     int i, j, min_idx; 
    

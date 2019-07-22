@@ -4,7 +4,7 @@
 #include "projectHeader.h"
 
 
-int partition_str (char arr[][MAX_LEN], int low, int high) 
+int partition_str (char *arr[], int low, int high) 
 { 
     char temp[1][MAX_LEN]; //to store temp variable
     int j;
@@ -30,7 +30,7 @@ int partition_str (char arr[][MAX_LEN], int low, int high)
 } 
 
 
-void quickSort_str(char arr[][MAX_LEN], int low, int high) 
+void quickSort_str(char *arr[], int low, int high) 
 { 
     if (low < high) 
     { 
