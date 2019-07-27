@@ -43,9 +43,6 @@ void merge_str(char *arr[],int low,int mid,int high) //Merging the Array Functio
     while(i<nL)strcpy(arr[k++],L[i++]);
     while(j<nR)strcpy(arr[k++],R[j++]);
 
-    freeArr(L, nL);
-    freeArr(R, nR);
-
 }
 
 
